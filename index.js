@@ -6,7 +6,13 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+require("./models/user");
 require("./services/passport-spotify");
+
+mongoose.connect(
+  process.env.DBURI,
+  { useNewUrlParser: true }
+);
 
 const app = express();
 
