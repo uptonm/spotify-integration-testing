@@ -29,6 +29,7 @@ app.use(passport.session());
 app.use(cors());
 
 require("./routes/spotify.auth.routes")(app);
+require("./routes/user.routes")(app);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

@@ -5,12 +5,10 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  console.log(id);
   User.findById(id).then(user => {
     done(null, user);
   });
@@ -21,7 +19,8 @@ passport.use(
     {
       clientID: process.env.SPOTIFYCLIENT,
       clientSecret: process.env.SPOTIFYSECRET,
-      callbackURL: "http://localhost:8888/auth/spotify/callback"
+      callbackURL: "/auth/spotify/callback",
+      proxy: true
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
       const existingUser = await User.findOne({ spotifyId: profile.id });
@@ -31,8 +30,18 @@ passport.use(
         return done(null, existingUser);
       } // We don't have a user record with this id, make a new record
       const user = await new User({
-        name: profile.displayName,
-        spotifyId: profile.id
+        first: profile.displayName
+          .split(" ")
+          .slice(0, -1)
+          .join(" "),
+        last: profile.displayName
+          .split(" ")
+          .slice(-1)
+          .join(" "),
+        profileImage: profile.photos.length === 0 ? "" : profile.photos[0],
+        profileLink: profile.profileUrl,
+        spotifyId: profile.id,
+        followers: profile.followers
       }).save();
       done(null, user);
     }
