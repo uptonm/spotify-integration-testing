@@ -1,6 +1,7 @@
 const passport = require("passport");
 const SpotifyStrategy = require("passport-spotify").Strategy;
 const mongoose = require("mongoose");
+const axios = require("axios");
 
 const User = mongoose.model("users");
 
@@ -24,11 +25,21 @@ passport.use(
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
       const existingUser = await User.findOne({ spotifyId: profile.id });
+      //console.log(accessToken);
+      // const currentSong = await axios.get(
+      //   "https://api.spotify.com/v1/me/player/currently-playing",
+      //   {
+      //     headers: {
+      //       Accept: "application/json",
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${accessToken}`
+      //     }
+      //   }
+      // );
+      //console.log(currentSong.data.item.album.images);
       if (existingUser) {
-        // We already have a record with the given profile id
-        //console.log('We already have a user with this id'); //Test
         return done(null, existingUser);
-      } // We don't have a user record with this id, make a new record
+      }
       const user = await new User({
         first: profile.displayName
           .split(" ")

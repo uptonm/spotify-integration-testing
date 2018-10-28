@@ -1,7 +1,13 @@
 const passport = require("passport");
 
 module.exports = app => {
-  app.get("/auth/spotify", passport.authenticate("spotify", {}));
+  app.get(
+    "/auth/spotify",
+    passport.authenticate("spotify", {
+      showDialog: true,
+      scope: ["user-read-currently-playing"]
+    })
+  );
 
   app.get(
     "/auth/spotify/callback",
