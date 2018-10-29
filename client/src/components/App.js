@@ -21,10 +21,10 @@ class App extends Component {
       case undefined:
         return (
           <div className="container text-center">
-            <button className="btn btn-success btn-lg">
+            <a href="/auth/spotify" className="btn btn-success btn-lg">
               <i className="fab fa-spotify" style={{ marginRight: "0.5em" }} />
               Login With Spotify
-            </button>
+            </a>
           </div>
         );
       case {}:
