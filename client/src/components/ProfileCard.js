@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileCard = ({ user }) => {
   return (
-    <div className="card card-profile">
+    <div className="card card-profile" style={{ height: "100%" }}>
       <div className="jumbotron text-center profile-banner">
         <img
           src={user.profileImage}
