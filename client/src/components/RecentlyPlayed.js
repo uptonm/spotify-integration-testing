@@ -4,7 +4,8 @@ const RecentlyPlayed = ({ recentlyPlayed }) => {
   return (
     <div className="card container" style={{ height: "100%" }}>
       <h1 className="display-4">Recently Played:</h1>
-      <div className="row" style={{ padding: "1.5em" }}>
+      <hr style={{ marginTop: "0.5rem" }} />
+      <div className="row">
         <div className="col-6">
           <a href={recentlyPlayed.albumLink}>
             <img

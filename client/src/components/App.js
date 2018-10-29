@@ -39,7 +39,7 @@ class App extends Component {
       default:
         return (
           <div className="row" style={{ height: "45vh" }}>
-            <div className="col-4">
+            <div className="col-3" style={{ marginRight: "0.5rem" }}>
               <ProfileCard user={this.state.user} />
             </div>
             <div className="col-8">

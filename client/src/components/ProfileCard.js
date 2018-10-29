@@ -7,7 +7,7 @@ const ProfileCard = ({ user }) => {
         <img
           src={user.profileImage}
           alt={user.first}
-          className="card-img-top rounded-circle align-middle profile-img"
+          className="card-img-top rounded-circle align-middle profile-img reflect"
         />
       </div>
       <div className="card-body text-center profile-body">
